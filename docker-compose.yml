@@ -1,0 +1,24 @@
+services:
+
+  laravel-docker:
+    container_name: barbershop
+    build: .
+    volumes:
+      - ./barbershop:/var/www/html
+    ports:
+      - 9000:80
+  
+  mysql_db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: REFArefa51243687@
+      MYSQL_DATABASE: barbershop
+    ports:
+    - 3306:3306
+  
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - 9001:80
+    environment:
+      - PMA_ARBITRARY=1

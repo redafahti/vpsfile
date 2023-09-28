@@ -1,0 +1,328 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "BarberShop",
+        "description": "BarberShop Docs API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/register": {
+            "post": {
+                "tags": [
+                    "Register"
+                ],
+                "summary": "User Register",
+                "description": "User Register here",
+                "operationId": "Register",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "text"
+                                    },
+                                    "email": {
+                                        "type": "text"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Register Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Register Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/login": {
+            "post": {
+                "tags": [
+                    "OAuth"
+                ],
+                "summary": "Oauth Login",
+                "operationId": "authLogin",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "token": {
+                                        "token": "token"
+                                    },
+                                    "user": {
+                                        "id": 0,
+                                        "code": "UID-00000",
+                                        "firstname": "firstname",
+                                        "lastname": "lastname",
+                                        "email": "mail@mail.com",
+                                        "phone": "000000000",
+                                        "image_profile": "http://host/img/00000.jpeg",
+                                        "qrcode": "00000000000",
+                                        "customer_name": "customer_name",
+                                        "status": "Active"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Failed to authenticate",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "message": "Error message"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "message": "The route {link} could not be found."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/logout": {
+            "post": {
+                "tags": [
+                    "OAuth"
+                ],
+                "summary": "Oauth Logout",
+                "operationId": "authLogout",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "message": "Successfully logged out"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "message": "Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "message": "The route {link} could not be found."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/get/me": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get My User Profile",
+                "operationId": "UserMeShow",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "message": "Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "message": "The route {link} could not be found."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/update/me": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update My User Profil",
+                "operationId": "UserMeUpdate",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "message": "Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "message": "The route {link} could not be found."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://sharecoserver.test/oauth/authorize",
+                        "tokenUrl": "http://sharecoserver.test/oauth/token",
+                        "refreshUrl": "http://sharecoserver.test/token/refresh",
+                        "scopes": []
+                    }
+                }
+            }
+        }
+    }
+}
